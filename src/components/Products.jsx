@@ -10,6 +10,7 @@ const Products = () => {
     const { products, searchTerm } = useSelector((state) => state.productReducer);
     useEffect(() => {
         dispatch(getAllProducts());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const data = searchTerm ? products.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase())) : products;
 
