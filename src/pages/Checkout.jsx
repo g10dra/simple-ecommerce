@@ -7,7 +7,6 @@ const Checkout = () => {
     const cartData = useSelector(state => state.cartReducer);
     const { products } = useSelector(state => state.productReducer);
     const prdIds = Object.keys(cartData);
-    const quantities = Object.values(cartData);
 
     const getProductInfo = (productId) => {
         return products.find(p => p._id === productId)
