@@ -3,15 +3,18 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar'; 
 import { BsFillCartCheckFill } from 'react-icons/bs';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { SITE_TITLE } from '../commonConstants';
+import { logoutUser } from '../redux/actions/loginActions';
 import Search from './Search';
 
 function Header() {
 
+  const dispatch = useDispatch();
   const cartData = useSelector(state=>state.cartReducer);
   const totalCount = Object.values(cartData).reduce((accumulator,count)=>accumulator+count,0);
+  const loginInfo = useSelector(state => state.loginReducer);
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
@@ -34,11 +37,20 @@ function Header() {
           <Search />
 
 
-        
+        {loginInfo.userInfo._id?
+         <>
+         <span style={{color:'white'}}>Welcome {loginInfo.userInfo.name}</span>
+         <Button onClick={e=>dispatch(logoutUser())} variant="outline-danger">Logout</Button>
+         </>
+        :
+        (
+          <> 
+          <Button as={Link} to={"/login"} variant="outline-success">Login</Button>&nbsp;&nbsp;
+            <Button as={Link} to={"/register"}  variant="outline-success">Register</Button>&nbsp;&nbsp;</>
+        )}
 
-            <Button variant="outline-success">Login</Button>&nbsp;&nbsp;
-            <Button variant="outline-success">Register</Button>&nbsp;&nbsp;
-            <Button variant="outline-danger">Logout</Button>
+            
+           
 
          
 
