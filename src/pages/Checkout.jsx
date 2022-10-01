@@ -1,7 +1,8 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import CartButton from "../components/CartButton";
+import { clearCart } from "../redux/actions/cartActions";
 import NetworkService from "../services/NetworkService";
 
 
@@ -9,11 +10,12 @@ const Checkout = () => {
     const cartData = useSelector(state => state.cartReducer);
     const { products } = useSelector(state => state.productReducer);
     const prdIds = Object.keys(cartData);
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const getProductInfo = (productId) => {
         return products.find(p => p._id === productId)
     }
     const {userInfo} = useSelector(state => state.loginReducer);
+    const dispatch = useDispatch();
     
     const placeOrder = () => {
 
@@ -58,7 +60,17 @@ const Checkout = () => {
 
             NetworkService.post("order/new",orderPayload)
             .then(({data}) => {
-               console.log(data)
+                //console.log(data)
+                if(data.success){
+                    window.alert("Order Placed successfully");
+                    dispatch(clearCart());
+                    navigate("/");
+                }else{
+                    window.alert("Order Failed");
+                }
+               
+            }).catch(err=>{
+                window.alert("Something went wrong!");
             })
 
 

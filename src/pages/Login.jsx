@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { Alert, Button, Container, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,10 +34,13 @@ const Login = () => {
             setError('Please input email and password!')
         }
     }
-
-    if (loginInfo.userInfo._id) {
+    useEffect(()=>{
+         if (loginInfo.userInfo._id) {
         navigate('/')
     }
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[loginInfo])
+   
 
     return (<Container>
 
@@ -59,7 +63,7 @@ const Login = () => {
 
         loginInfo
 
-        {error !== "" || loginInfo.loginError !== "" && <Alert variant={"danger"}>
+        {(error !== "" || loginInfo.loginError !== "") && <Alert variant={"danger"}>
             {error || loginInfo.loginError}
         </Alert>}
 

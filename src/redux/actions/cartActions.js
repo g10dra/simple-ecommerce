@@ -1,4 +1,4 @@
-import {  DECREASE, INCREASE } from "../types";
+import {  CLEAR_CART, DECREASE, INCREASE } from "../types";
 
 export const increase = (product_id) => {
   return {
@@ -14,4 +14,10 @@ export const decrease = (product_id) => {
     payload: product_id
   }
  
+};
+
+export const clearCart = () => {
+  return {
+    type: CLEAR_CART
+  }
 };

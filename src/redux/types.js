@@ -4,6 +4,7 @@ export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 export const LOADING_STATE = "LOADING_STATE";
 export const INCREASE = "INCREASE";
 export const DECREASE = "DECREASE";
+export const CLEAR_CART = "CLEAR_CART";
 export const USER_INFO = "USER_INFO";
-export const USER_LOGIN_ERROR = "USER_LOGIN_ERROR"
+export const USER_LOGIN_ERROR = "USER_LOGIN_ERROR";
 

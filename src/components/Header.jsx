@@ -19,7 +19,7 @@ function Header() {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
-        <Navbar.Brand >{SITE_TITLE}</Navbar.Brand>
+        <Navbar.Brand ><Nav.Link as={Link} to={"/"}>{SITE_TITLE}</Nav.Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -30,6 +30,8 @@ function Header() {
             <Nav.Link as={Link} to={"/"}>Home</Nav.Link>
 
             <Nav.Link as={Link} to={"/checkout"}>{totalCount}<BsFillCartCheckFill /></Nav.Link>
+            
+            
            
              
           </Nav>
@@ -39,7 +41,8 @@ function Header() {
 
         {loginInfo.userInfo._id?
          <>
-         <span style={{color:'white'}}>Welcome {loginInfo.userInfo.name}</span>
+         <span style={{color:'white'}}>Welcome {loginInfo.userInfo.name}</span> 
+         <Button as={Link} to={"/my-orders"} variant="outline-success">My Orders</Button>
          <Button onClick={e=>dispatch(logoutUser())} variant="outline-danger">Logout</Button>
          </>
         :

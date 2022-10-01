@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test snapshot with title 1`] = `
+<DocumentFragment>
+  <h1>
+    Hello, I am Custom Title
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`test snapshot without title 1`] = `
+<DocumentFragment>
+  <h1>
+    Hello, I am Test Component
+  </h1>
+</DocumentFragment>
+`;
