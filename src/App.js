@@ -7,41 +7,41 @@ import SpinnerComponent from './components/SpinnerComponent';
 import Checkout from './pages/Checkout';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { persistUserLogin } from './redux/actions/loginActions';
+import ProtectedRoute from './ProtectedRoute';
+import MyOrders from './pages/MyOrders';
 
 
 function App() {
   const dispatch = useDispatch();
 
-useEffect(()=>{
-
-  let userData=localStorage.getItem('userData');
-  if(userData){
-    userData=JSON.parse(userData);
-    dispatch(persistUserLogin(userData));
-  }
-
-},[])
+ let userData = localStorage.getItem('userData');
+    if (userData) {
+      userData = JSON.parse(userData);
+      dispatch(persistUserLogin(userData));
+    }
+ 
 
 
   return (
     <div className="App">
       <Router>
-        <SpinnerComponent /> 
+        <SpinnerComponent />
         <Header />
-        
-        <Routes> 
-        <Route path="/" element={<Home />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
 
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-      
-        </Routes>  
-      <Footer/>
+          <Route path="/my-orders" element={<ProtectedRoute>
+            <MyOrders />
+          </ProtectedRoute>} />
+
+        </Routes>
+        <Footer />
       </Router>
     </div>
   );
